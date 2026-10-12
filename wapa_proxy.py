@@ -24,7 +24,7 @@ def proxy():
         try:
             with requests.get(UPSTREAM_STREAM_URL, headers=headers, stream=True, timeout=15) as req:
                 req.raise_for_status()
-                for chunk in req.iter_content(chunk_size=4096):
+                for chunk in req.iter_content(chunk_size=32768):
                     if chunk:
                         yield chunk
         except Exception as e:
