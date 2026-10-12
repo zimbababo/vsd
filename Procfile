@@ -1,5 +1,6 @@
+import time
+from flask import Flask, redirect
 
-web: gunicorn wapa_proxy:app
 app = Flask(__name__)
 
 # Cache variables to hold the active stream URL and its fetch time
@@ -9,7 +10,6 @@ TOKEN_VALIDITY_SECONDS = 3600  # Refresh every 1 hour (adjust as needed)
 
 def fetch_fresh_stream_url():
     return "http://23.153.217.158:8080/JOSEWEBTV25*201/39*22hdkult202/55342"
- 
 
 def get_active_url():
     global cached_stream_url, last_fetched_time
@@ -39,4 +39,5 @@ def proxy_stream():
 if __name__ == '__main__':
     # Runs locally on port 8080
     app.run(host='0.0.0.0', port=8080)
+ 
  
