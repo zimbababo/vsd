@@ -14,11 +14,17 @@ https://vsd-v45s.onrender.com/wapa
 """
     return Response(m3u_content, mimetype='application/x-mpegurl')
 
-# Endpoint 2: The actual video stream proxy
+# Endpoint 2: The actual video stream proxy with TiviMate User-Agent
 @app.route('/wapa')
 def proxy():
     try:
-        req = requests.get(UPSTREAM_STREAM_URL, stream=True, timeout=15)
+        headers = {
+            'User-Agent': 'TiviMate/5.1.6 (Android 11)',
+            'Accept': '*/*'
+        }
+        
+        req = requests.get(UPSTREAM_STREAM_URL, headers=headers, stream=True, timeout=15)
+        
         return Response(
             req.iter_content(chunk_size=1024),
             content_type=req.headers.get('content-type', 'video/mp2t'),
