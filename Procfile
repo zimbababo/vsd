@@ -1,5 +1,5 @@
 
-
+web: gunicorn wapa_proxy:app
 app = Flask(__name__)
 
 # Cache variables to hold the active stream URL and its fetch time
