@@ -1,1 +1,1 @@
-web: gunicorn wapa_proxy:app
+web: gunicorn -k gevent wapa_proxy:app
